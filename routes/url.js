@@ -11,7 +11,9 @@ router.post("/encurtar", async (req, res) => {
   const { longUrl } = req.body;
 
   if (!validUrl.isUri(baseUrl)) {
-    return res.status(401).json(`Variavel de url base (baseURL: ${baseUrl}) inválida.`);
+    return res
+      .status(406)
+      .json(`Variavel de url base (baseURL: ${baseUrl}) inválida.`);
   }
 
   const urlCode = shortid.generate();
@@ -35,13 +37,12 @@ router.post("/encurtar", async (req, res) => {
         await url.save();
         res.json(url);
       }
-
     } catch (err) {
       console.log(err);
       res.status(500).json("Ocorreu um erro ao processasr a URL.");
     }
   } else {
-    res.status(401).json("A URL informada está em um formato inválido.");
+    res.status(406).json("A URL informada está em um formato inválido.");
   }
 });
 
