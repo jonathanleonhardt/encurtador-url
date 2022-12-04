@@ -32,6 +32,7 @@ router.post("/encurtar", async (req, res) => {
           longUrl,
           shortUrl,
           urlCode,
+          timesClicked: 0,
           date: new Date(),
         });
         await url.save();
